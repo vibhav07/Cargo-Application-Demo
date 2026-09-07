@@ -1,0 +1,14 @@
+{
+  "name": "cargo-shipment-tracker-root",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "backend": "npm --prefix backend start",
+    "frontend": "npm --prefix frontend dev",
+    "seed": "NODE_PATH=backend/node_modules node database/sqlite/seed.js"
+  },
+  "dependencies": {
+    "sqlite3": "^5.1.7"
+  }
+}
