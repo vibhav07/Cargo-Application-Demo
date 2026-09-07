@@ -1,0 +1,342 @@
+Perfect for your demo. Since the goal is to showcase:
+
+Jira Request → Specification Agent → Development Agent → Ticket Analysis Agent → SRE Agent
+
+you need:
+
+A small but realistic logistics application
+A PRD for the base application (to generate the repository)
+A future feature request (that will be implemented by the agent using repository context)
+
+The feature should be meaningful for a Cargo Partner L2 support audience while remaining small enough to build quickly.
+
+PRD
+Smart Shipment Tracker
+Product Overview
+
+Smart Shipment Tracker is a lightweight logistics operations portal that allows support teams and operations personnel to monitor active shipments, view shipment status, track delays, and investigate shipment exceptions.
+
+The application is intentionally simple and designed to mimic a real Cargo & Logistics business application.
+
+The system will provide a central dashboard showing shipment information and allow users to search, track, and investigate shipments.
+
+Business Problem
+
+Operations teams receive frequent customer inquiries regarding shipment status, delays, and delivery timelines.
+
+Information is often scattered across multiple systems, making issue investigation slow and heavily dependent on experienced support personnel.
+
+A centralized shipment tracking solution can improve operational visibility and reduce support effort.
+
+Objectives
+
+The application should:
+
+Track active shipments
+Display shipment statuses
+Allow shipment search
+Show shipment details
+Highlight delayed shipments
+Enable support teams to investigate shipment events
+User Roles
+Operations User
+
+Can:
+
+View shipments
+Search shipments
+View shipment details
+Monitor delays
+Support Analyst
+
+Can:
+
+Search shipments
+Investigate shipment history
+View status transitions
+Review shipment events
+Functional Requirements
+FR-1 Shipment Dashboard
+
+Display list of shipments.
+
+Attributes:
+
+Shipment ID
+Customer Name
+Origin
+Destination
+Transport Mode
+Current Status
+Estimated Delivery Date
+FR-2 Shipment Search
+
+Users can search shipments using:
+
+Shipment ID
+Customer Name
+FR-3 Shipment Detail View
+
+Selecting a shipment shows:
+
+Shipment Information
+Shipment ID
+Customer
+Origin
+Destination
+Transport Mode
+Timeline
+
+Shipment events:
+
+Booked
+Picked Up
+In Transit
+Customs Processing
+Out For Delivery
+Delivered
+FR-4 Delay Monitoring
+
+System identifies delayed shipments.
+
+A shipment is considered delayed when:
+
+Current Date > Estimated Delivery Date
+
+Delayed shipments are highlighted.
+
+FR-5 Shipment Status History
+
+Display all status changes.
+
+Fields:
+
+Previous Status
+New Status
+Timestamp
+Non Functional Requirements
+Performance
+
+Search results under 2 seconds.
+
+Security
+
+Read-only application.
+
+No authentication for demo scope.
+
+Availability
+
+Single user demo environment.
+
+Data Model
+Shipment
+{
+  "shipmentId": "SP1001",
+  "customerName": "ABC Retail",
+  "origin": "Singapore",
+  "destination": "Germany",
+  "transportMode": "Air",
+  "status": "In Transit",
+  "estimatedDeliveryDate": "2026-09-10"
+}
+
+Shipment Event
+{
+  "shipmentId": "SP1001",
+  "eventType": "Customs Processing",
+  "eventTime": "2026-09-06T14:00:00"
+}
+
+Technology Stack
+
+Frontend:
+
+React
+
+Backend:
+
+Python FastAPI
+
+Database:
+
+SQLite
+Repository Structure
+shipment-tracker/
+
+ ├── frontend/
+ │    ├── dashboard
+ │    ├── shipment-search
+ │    └── shipment-details
+
+ ├── backend/
+ │    ├── api
+ │    ├── services
+ │    ├── repositories
+ │    └── models
+
+ ├── database/
+ │    └── sqlite
+
+ └── docs/
+      └── architecture.md
+
+Seed Data
+
+Create:
+
+25 shipments
+5 delayed shipments
+Multiple origins and destinations
+
+Countries:
+
+Singapore
+Germany
+Austria
+India
+Netherlands
+UAE
+
+Transport Modes:
+
+Air
+Ocean
+Road
+Acceptance Criteria
+
+✅ User can view shipment list
+
+✅ User can search shipment using ID
+
+✅ User can search shipment using customer name
+
+✅ User can view shipment details
+
+✅ User can view shipment timeline
+
+✅ Delayed shipments are highlighted
+
+✅ User can view status history
+
+FEATURE REQUEST (JIRA STORY)
+
+This is what you will feed into Forge-X later.
+
+Story ID
+
+LOG-241
+
+Title
+
+Add Shipment Priority Management Capability
+
+Business Problem
+
+Operations teams currently cannot identify high-priority shipments from the dashboard.
+
+Critical shipments containing urgent customer deliveries need to be tracked separately to ensure proactive monitoring and faster issue resolution.
+
+Support teams should immediately know when a shipment requires special attention.
+
+User Story
+
+As an Operations User,
+
+I want to assign and view shipment priorities,
+
+So that I can quickly identify and monitor critical shipments.
+
+Functional Requirements
+Priority Levels
+
+The system shall support:
+
+Low
+Medium
+High
+Critical
+Dashboard Enhancement
+
+Add Priority column to shipment dashboard.
+
+Shipment Detail Enhancement
+
+Display priority information inside shipment details page.
+
+Search Enhancement
+
+Allow filtering shipments by priority.
+
+Visual Indicators
+
+Show color badges:
+
+Low → Gray
+Medium → Blue
+High → Orange
+Critical → Red
+Default Priority
+
+Existing shipments should default to:
+
+Medium
+
+Acceptance Criteria
+Scenario 1
+
+Given a shipment with Critical priority
+
+When user opens dashboard
+
+Then priority is visible.
+
+Scenario 2
+
+Given multiple shipments
+
+When user selects High priority filter
+
+Then only High priority shipments are returned.
+
+Scenario 3
+
+Given shipment details page
+
+When shipment is opened
+
+Then priority information is displayed.
+
+Scenario 4
+
+Given existing shipment records
+
+When feature is deployed
+
+Then all shipments have default priority of Medium.
+
+Why this Demo Works
+
+This feature will force the agents to:
+
+✅ Read existing Shipment model
+
+✅ Understand database schema
+
+✅ Discover dashboard component
+
+✅ Discover search component
+
+✅ Understand API layer
+
+✅ Modify backend
+
+✅ Modify frontend
+
+✅ Update database model
+
+✅ Generate tests
+
+✅ Produce meaningful dependency graph output
+
+For a Cargo Partner audience, "priority shipments" feels realistic and operational, while remaining small enough to generate a complete end-to-end AI-driven development workflow during the demo.
